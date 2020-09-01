@@ -1,4 +1,4 @@
-const got    = require('got');
+const needle = require('needle')
 const crypto = require('crypto');
 const qs     = require('qs');
 
@@ -34,12 +34,12 @@ const rawRequest = async (url, headers, data, timeout) => {
 
 	const options = { headers, timeout };
 
-	Object.assign(options, {
-		method : 'POST',
-		body   : qs.stringify(data),
-	});
+	// Object.assign(options, {
+	// 	method : 'POST',
+	// 	body   : qs.stringify(data),
+	// });
 
-	const { body } = await got(url, options);
+	const { body } = await needle.post(url, qs.stringify(data), options);
 	const response = JSON.parse(body);
 
 	if(response.error && response.error.length) {
