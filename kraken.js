@@ -39,7 +39,10 @@ const rawRequest = async (url, headers, data, timeout) => {
 	// 	body   : qs.stringify(data),
 	// });
 
-	const { body } = await needle.post(url, qs.stringify(data), options);
+	const body = await needle.post(url, qs.stringify(data), options);
+	console.log('body')
+	console.log(body)
+	
 	const response = JSON.parse(body);
 
 	if(response.error && response.error.length) {
